@@ -1,15 +1,33 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../prisma/client"
+  moduleFormat = "cjs"
+  engineType = "client"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String?  @unique
-  password  String?
-  createdAt DateTime @updatedAt
+  id String @id @default(uuid())
+  creampuffs Int @default(0)
+  achievements Achievement[]
+}
+
+model Achievement {
+  id String @id @default(uuid())
+  description String?
+  status Boolean
+  completionSteps CompletionStep[]
+  user User @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model CompletionStep {
+  id String @id @default(uuid())
+  description String?
+  status Boolean
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+  achievementId String
 }
