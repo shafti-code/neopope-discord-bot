@@ -3,6 +3,7 @@ import { NecordModule } from 'necord';
 import { IntentsBitField } from 'discord.js';
 import { StatusController } from 'modules/status/status.controller';
 import { AppUpdate } from 'app.update';
+import { CreamPuffService } from 'modules/discord/creampuff.commands';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { AppUpdate } from 'app.update';
     })
   ],
   controllers: [StatusController],
-  providers: [AppUpdate]
+  providers: [AppUpdate, CreamPuffService]
 })
 export class AppModule {}
